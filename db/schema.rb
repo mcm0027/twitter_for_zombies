@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160204151639) do
+ActiveRecord::Schema.define(version: 20160204153646) do
+
+  create_table "assignments", force: true do |t|
+    t.integer  "zombie_id"
+    t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "assignments", ["role_id"], name: "index_assignments_on_role_id"
+  add_index "assignments", ["zombie_id"], name: "index_assignments_on_zombie_id"
 
   create_table "brains", force: true do |t|
     t.integer  "zombie_id"
@@ -22,6 +32,12 @@ ActiveRecord::Schema.define(version: 20160204151639) do
   end
 
   add_index "brains", ["zombie_id"], name: "index_brains_on_zombie_id"
+
+  create_table "roles", force: true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "zombies", force: true do |t|
     t.string   "name"
